@@ -1,0 +1,26 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: a8cluster-sonarqube-ingress
+  namespace: sonarqube
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    ingress.kubernetes.io/ssl-redirect: "True"
+    nginx.org/proxy-read-timeout: 300s
+spec:
+  tls:
+  - hosts:
+    - code.analysis.com
+  rules:
+  - host: code.analysis.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: sonarqube
+          servicePort: 80
+  tls:
+  - hosts:
+    - code.analysis.com
+    secretName: cert01-secret
+
