@@ -32,6 +32,13 @@ spec:
           ports:
           - containerPort: 9000
             protocol: TCP
+          resources:
+            limits:
+              cpu: "2"
+              memory: 2Gi
+            requests:
+              cpu: 500m
+              memory: 1Gi
       volumes:
       - name: sonar-data
         persistentVolumeClaim:
